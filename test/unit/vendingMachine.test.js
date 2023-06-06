@@ -2,12 +2,7 @@ const { expect } = require("chai")
 const { ethers } = require("hardhat")
 
 describe("VendingMachine", function () {
-    let owner,
-        user,
-        vendingMachine,
-        INITIAL_BALANCE,
-        DONUT_PRICE,
-        PURCHASED_DONUTS = 5
+    let owner, user, vendingMachine, INITIAL_BALANCE, DONUT_PRICE, PURCHASED_DONUTS
 
     beforeEach(async function () {
         // deploy a new instance of VendingMachine
@@ -29,12 +24,17 @@ describe("VendingMachine", function () {
     })
 
     it("should allow the owner to restock the vending machine", async function () {
-        const restockAmount = 5
+        const RESTOCK_AMOUNT = 5
+        PURCHASED_DONUTS = 10
+
         // get the value
-        const value = ethers.utils.parseEther((PURCHASED_DONUTS * DONUT_PRICE).toString())
+        const value = (PURCHASED_DONUTS * DONUT_PRICE).toString()
+        console.log(`the value is : ${value}`)
         // purchase 5 donuts
-        console.log(value)
-        // await vendingMachine.purchase(PURCHASED_DONUTS, { value })
+        // we expect owner can restock 5 donut
+        await vendingMachine.purchase(PURCHASED_DONUTS, { value })
+        const remaind_donuts = await vendingMachine.getVendingMachineBalance()
+        console.log(`the machine has: ${remaind_donuts} donuts. `)
         //
         // await vendingMachine.restock(restockAmount)
         // const balance = await vendingMachine.getVendingMachineBalance()
