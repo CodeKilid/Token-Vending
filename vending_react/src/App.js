@@ -2,7 +2,7 @@ import "./App.css"
 import { ethers } from "ethers"
 import VendingMachine from "./artifacts/contracts/VendingMachine.sol/VendingMachine.json"
 
-const VendingMachineAddress = "0x66e5CE39C90341f54b6D5B43710B2e034CDe6A7D"
+const VENDING_MACHINE_ADDRESS = "0x66e5CE39C90341f54b6D5B43710B2e034CDe6A7D"
 
 function GetVendingMachineBalance() {}
 
