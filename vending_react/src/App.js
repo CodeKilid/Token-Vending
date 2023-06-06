@@ -1,12 +1,9 @@
 import "./App.css"
-import GetUserBalance from "./components/all.js"
+import { ethers } from "ethers"
+import VendingMachine from "../../artifacts/contracts/VendingMachine.sol/VendingMachine.json"
 
 function App() {
-    return (
-        <div className="App">
-            <GetUserBalance />
-        </div>
-    )
+    return <div className="App"></div>
 }
 
 export default App
