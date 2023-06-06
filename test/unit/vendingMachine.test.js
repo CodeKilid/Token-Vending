@@ -18,12 +18,12 @@ describe("VendingMachine", function () {
         DONUT_PRICE = await vendingMachine.price()
     })
 
-    it("should have an initial balance of 100 donuts", async function () {
+    it("1, should have an initial balance of 100 donuts", async function () {
         const balance = await vendingMachine.getVendingMachineBalance()
         expect(balance).to.equal(INITIAL_BALANCE)
     })
 
-    it("should allow the owner to restock the vending machine", async function () {
+    it("2, should allow the owner to restock the vending machine", async function () {
         const RESTOCK_AMOUNT = 5
         PURCHASED_DONUTS = 10
 
@@ -46,7 +46,7 @@ describe("VendingMachine", function () {
         expect(remaindDonutsAfterRestock).to.equal(remaindDonutsAfterPurchase + RESTOCK_AMOUNT)
     })
 
-    it("should allow a user to purchase donuts", async function () {
+    it("3, should allow a user to purchase donuts", async function () {
         PURCHASED_DONUTS = 2
         const value = (PURCHASED_DONUTS * DONUT_PRICE).toString()
         await vendingMachine.purchase(PURCHASED_DONUTS, { value })
@@ -58,21 +58,21 @@ describe("VendingMachine", function () {
         assert.equal(userBalance, PURCHASED_DONUTS)
     })
 
-    it("should not allow a purchase if the user sends insufficient funds", async function () {
+    it("4, should not allow a purchase if the user sends insufficient funds", async function () {
         const value = ethers.utils.parseEther((PURCHASED_DONUTS * DONUT_PRICE - 1).toString())
         await expect(
             vendingMachine.purchase(PURCHASED_DONUTS, { value })
         ).to.be.revertedWithCustomError(vendingMachine, "VendingMachine__payMoreEth")
     })
 
-    it("should not allow a purchase if there are not enough donuts in stock", async function () {
+    it("5, should not allow a purchase if there are not enough donuts in stock", async function () {
         const value = ethers.utils.parseEther((PURCHASED_DONUTS * DONUT_PRICE + 200).toString())
         await expect(vendingMachine.purchase(INITIAL_BALANCE + 1, { value }))
             .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__NotEnoughDonut")
             .withArgs(await vendingMachine.getVendingMachineBalance())
     })
 
-    it("should not allow a user instead owner to restock the balance", async () => {
+    it("6, should not allow a user instead owner to restock the balance", async () => {
         await expect(vendingMachine.connect(user).restock(10))
             .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__ownerProperties")
             .withArgs(owner.address)
