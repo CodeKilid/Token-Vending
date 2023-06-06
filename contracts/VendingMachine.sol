@@ -13,6 +13,7 @@ error VendingMachine__NotEnoughDonut(uint remainDonut);
 contract VendingMachine {
     /*  variables  */
     address public owner;
+    uint constant price = 0.00001 ether;
 
     mapping(address => uint256) public donutBalances;
 
@@ -32,16 +33,16 @@ contract VendingMachine {
     }
 
     // because update the value --> don't use the view or pure
-    function restock(uint256 _amount) public ownerProperties(msg.sender) {
+    function restock(uint256 _amount) external ownerProperties(msg.sender) {
         donutBalances[address(this)] += _amount;
     }
 
     // payable for receive ether
-    function purchase(uint256 _amount) public payable {
+    function purchase(uint256 _amount) external payable {
         // we need to check purchaser send enough money
 
-        if (msg.value < _amount * 2 ether) {
-            revert VendingMachine__payMoreEth(_amount * 2 ether);
+        if (msg.value < _amount * price) {
+            revert VendingMachine__payMoreEth(_amount * price);
         }
         // enough donuts in the vending machine for requests
 
