@@ -33,12 +33,17 @@ describe("VendingMachine", function () {
         // purchase 5 donuts
         // we expect owner can restock 5 donut
         await vendingMachine.purchase(PURCHASED_DONUTS, { value })
-        const remaind_donuts = await vendingMachine.getVendingMachineBalance()
-        console.log(`the machine has: ${remaind_donuts} donuts. `)
+        const remaindDonutsAfterPurchase = Number(await vendingMachine.getVendingMachineBalance())
+        console.log(
+            `the machine has after purchase 10 donuts: ${remaindDonutsAfterPurchase} donuts. `
+        )
         //
-        // await vendingMachine.restock(restockAmount)
-        // const balance = await vendingMachine.getVendingMachineBalance()
-        // expect(balance).to.equal(INITIAL_BALANCE + restockAmount)
+        await vendingMachine.restock(RESTOCK_AMOUNT)
+        const remaindDonutsAfterRestock = Number(await vendingMachine.getVendingMachineBalance())
+        console.log(
+            `the machine has after restock 5 donuts: ${remaindDonutsAfterRestock} donuts. `
+        )
+        expect(remaindDonutsAfterRestock).to.equal(remaindDonutsAfterPurchase + RESTOCK_AMOUNT)
     })
 
     it("should allow a user to purchase donuts", async function () {
