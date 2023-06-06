@@ -14,8 +14,8 @@ error VendingMachine__Limitation(uint limitation);
 contract VendingMachine {
     /*  variables  */
     address public owner;
-    uint constant price = 0.00001 ether;
-    uint constant initialBalance = 100;
+    uint public constant price = 0.00001 ether;
+    uint public constant initialBalance = 100;
 
     mapping(address => uint256) public donutBalances;
 
