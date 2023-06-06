@@ -46,10 +46,7 @@ describe("VendingMachine", function () {
   });
 
   it("should allow a user to purchase donuts", async function () {
-    console.log(DONUT_PRICE);
-    const value = ethers.utils.parseEther(
-      (PURCHASED_DONUTS * DONUT_PRICE).toString()
-    );
+    const value = (PURCHASED_DONUTS * DONUT_PRICE).toString();
     await vendingMachine.purchase(PURCHASED_DONUTS, { value });
     const balance = await vendingMachine.getVendingMachineBalance();
     expect(balance).to.equal(INITIAL_BALANCE - PURCHASED_DONUTS);
