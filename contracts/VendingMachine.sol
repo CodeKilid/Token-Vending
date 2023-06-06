@@ -9,17 +9,19 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 error VendingMachine__ownerProperties(address owner);
 error VendingMachine__payMoreEth(uint amount);
 error VendingMachine__NotEnoughDonut(uint remainDonut);
+error VendingMachine__Limitation(uint limitation);
 
 contract VendingMachine {
     /*  variables  */
     address public owner;
     uint constant price = 0.00001 ether;
+    uint constant initialBalance = 100;
 
     mapping(address => uint256) public donutBalances;
 
     constructor() {
         owner = msg.sender;
-        donutBalances[address(this)] = 100;
+        donutBalances[address(this)] = initialBalance;
     }
 
     // anyone should be able to set amount of donut
@@ -34,6 +36,9 @@ contract VendingMachine {
 
     // because update the value --> don't use the view or pure
     function restock(uint256 _amount) external ownerProperties(msg.sender) {
+        if (donutBalances[address(this)] + _amount > initialBalance) {
+            revert VendingMachine__Limitation(initialBalance);
+        }
         donutBalances[address(this)] += _amount;
     }
 

@@ -2,12 +2,12 @@ const { expect } = require("chai")
 const { ethers } = require("hardhat")
 
 describe("VendingMachine", function () {
-    let owner
-    let user
-    let vendingMachine
-    const INITIAL_BALANCE = 100
-    const DONUT_PRICE = 2
-    const PURCHASED_DONUTS = 5
+    let owner,
+        user,
+        vendingMachine,
+        INITIAL_BALANCE,
+        DONUT_PRICE,
+        PURCHASED_DONUTS = 5
 
     beforeEach(async function () {
         // deploy a new instance of VendingMachine
@@ -18,6 +18,9 @@ describe("VendingMachine", function () {
         const VendingMachine = await ethers.getContractFactory("VendingMachine")
         vendingMachine = await VendingMachine.deploy()
         await vendingMachine.deployed()
+
+        INITIAL_BALANCE = await VendingMachine.initialBalance
+        DONUT_PRICE = await VendingMachine.price
     })
 
     it("should have an initial balance of 100 donuts", async function () {
