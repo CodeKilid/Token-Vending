@@ -80,7 +80,20 @@ describe("VendingMachine", function () {
             .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__ownerProperties")
             .withArgs(owner.address)
     })
-    it("should not trust to anyOne for anything, i know i can do it and just rely the god", async () => {})
+    it("should not trust to anyOne for anything, i know i can do it and just rely on the god", async () => {})
 
-    it("another test is for us, for this thing that we can do it with better things", async () => {})
+    it("8, get the buyer balance after purchase", async () => {
+        PURCHASED_DONUTS = 10
+        const value = (PURCHASED_DONUTS * DONUT_PRICE).toString()
+        const balanceBeforePurchase = await vendingMachine.getBuyerBalancer()
+        console.log(`the owner balance before purchase is : ${balanceBeforePurchase}`)
+        // purchase with the owner
+        await vendingMachine.purchase(PURCHASED_DONUTS, { value })
+
+        const balanceAfterPurchase = await vendingMachine.getBuyerBalancer()
+        console.log(`the owner balance after purchase is : ${balanceAfterPurchase}`)
+
+        expect(balanceBeforePurchase).to.equal(balanceAfterPurchase - PURCHASED_DONUTS)
+        expect(balanceAfterPurchase).to.equal(balanceBeforePurchase + PURCHASED_DONUTS)
+    })
 })
