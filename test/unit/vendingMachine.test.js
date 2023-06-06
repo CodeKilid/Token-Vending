@@ -80,7 +80,12 @@ describe("VendingMachine", function () {
             .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__ownerProperties")
             .withArgs(owner.address)
     })
-    it("should not trust to anyOne for anything, i know i can do it and just rely on the god", async () => {})
+    it("7, revert if balance would be more then initialBalance", async () => {
+        console.log(`INITIAL_BALANCE is ${INITIAL_BALANCE}`)
+        await expect(vendingMachine.restock(30))
+            .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__Limitation")
+            .withArgs(INITIAL_BALANCE)
+    })
 
     it("8, get the buyer balance after purchase", async () => {
         PURCHASED_DONUTS = 10
