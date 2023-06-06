@@ -15,12 +15,12 @@ describe("VendingMachine", function () {
 
         // deploy contract
 
-        const VendingMachine = await ethers.getContractFactory("VendingMachine")
-        vendingMachine = await VendingMachine.deploy()
+        const VendingMachineContract = await ethers.getContractFactory("VendingMachine")
+        vendingMachine = await VendingMachineContract.deploy()
         await vendingMachine.deployed()
 
-        INITIAL_BALANCE = await VendingMachine.initialBalance()
-        DONUT_PRICE = await VendingMachine.price()
+        INITIAL_BALANCE = await vendingMachine.initialBalance
+        DONUT_PRICE = await vendingMachine.price
     })
 
     it("should have an initial balance of 100 donuts", async function () {
