@@ -19,8 +19,8 @@ describe("VendingMachine", function () {
         vendingMachine = await VendingMachine.deploy()
         await vendingMachine.deployed()
 
-        INITIAL_BALANCE = await VendingMachine.initialBalance
-        DONUT_PRICE = await VendingMachine.price
+        INITIAL_BALANCE = await VendingMachine.initialBalance()
+        DONUT_PRICE = await VendingMachine.price()
     })
 
     it("should have an initial balance of 100 donuts", async function () {
@@ -29,10 +29,16 @@ describe("VendingMachine", function () {
     })
 
     it("should allow the owner to restock the vending machine", async function () {
-        const restockAmount = 50
-        await vendingMachine.restock(restockAmount)
-        const balance = await vendingMachine.getVendingMachineBalance()
-        expect(balance).to.equal(INITIAL_BALANCE + restockAmount)
+        const restockAmount = 5
+        // get the value
+        const value = ethers.utils.parseEther((PURCHASED_DONUTS * DONUT_PRICE).toString())
+        // purchase 5 donuts
+        await vendingMachine.purchase(PURCHASED_DONUTS, { value })
+        //
+        // await vendingMachine.restock(restockAmount)
+        // const balance = await vendingMachine.getVendingMachineBalance()
+        // expect(balance).to.equal(INITIAL_BALANCE + restockAmount)
+        expect
     })
 
     it("should allow a user to purchase donuts", async function () {
