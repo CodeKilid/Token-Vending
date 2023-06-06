@@ -61,9 +61,9 @@ describe("VendingMachine", function () {
     it("4, should not allow a purchase if the user sends insufficient funds", async function () {
         PURCHASED_DONUTS = 3
         const value = (PURCHASED_DONUTS * DONUT_PRICE - 1).toString()
-        await expect(
-            vendingMachine.purchase(PURCHASED_DONUTS, { value })
-        ).to.be.revertedWithCustomError(vendingMachine, "VendingMachine__payMoreEth")
+        await expect(vendingMachine.purchase(PURCHASED_DONUTS, { value }))
+            .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__payMoreEth")
+            .withArgs(PURCHASED_DONUTS * DONUT_PRICE)
     })
 
     it("5, should not allow a purchase if there are not enough donuts in stock", async function () {
