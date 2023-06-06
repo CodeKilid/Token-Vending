@@ -66,8 +66,9 @@ describe("VendingMachine", function () {
     })
 
     it("5, should not allow a purchase if there are not enough donuts in stock", async function () {
-        const value = ethers.utils.parseEther((PURCHASED_DONUTS * DONUT_PRICE + 200).toString())
-        await expect(vendingMachine.purchase(INITIAL_BALANCE + 1, { value }))
+        PURCHASED_DONUTS = 200
+        const value = (PURCHASED_DONUTS * DONUT_PRICE).toString()
+        await expect(vendingMachine.purchase(PURCHASED_DONUTS, { value }))
             .to.be.revertedWithCustomError(vendingMachine, "VendingMachine__NotEnoughDonut")
             .withArgs(await vendingMachine.getVendingMachineBalance())
     })
