@@ -26,6 +26,9 @@ const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL
 
 module.exports = {
     defaultNetwork: "hardhat",
+    paths: {
+        artifacts: "./artifacts",
+    },
     networks: {
         hardhat: {
             chainId: 31337,
