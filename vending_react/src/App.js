@@ -70,7 +70,23 @@ function App() {
     }
 
     // purchase
-    async function purchase() {}
+    async function purchase() {
+        if (!value) return
+        if (typeof window.ethereum !== "undefined") {
+            await RequestAccount()
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const signer = provider.getSigner()
+            const vendingContract = new ethers.Contract(
+                VENDING_MACHINE_ADDRESS,
+                VendingMachine.abi,
+                provider
+            )
+            const purchaseTx = await vendingContract.purchase()
+
+            setValue()
+            await purchaseTx.wait()
+        }
+    }
 
     // restock
     async function restock() {
@@ -111,7 +127,7 @@ function App() {
                     <button onClick={restock}>restock</button>
 
                     <button onClick={getBuyerBalance}>Buyer Balance</button>
-                    <button onClick="">Purchse</button>
+                    <button onClick={purchase}>Purchse</button>
                 </div>
                 <div className="display">
                     <h2 className="vending-balance"> Vending balance: {vendingBalance}</h2>
