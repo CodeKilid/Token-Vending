@@ -29,7 +29,7 @@ function App() {
             try {
                 const newBuyerBalance = await vendingContract.getBuyerBalancer()
                 setBuyerBalance(newBuyerBalance)
-                console.log(buyerBalance)
+                console.log("BuyerBalance", buyerBalance.toString())
             } catch (error) {
                 console.log(error)
             }
