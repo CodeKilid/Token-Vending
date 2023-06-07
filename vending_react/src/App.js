@@ -152,7 +152,7 @@ function App() {
                         setCount(v.target.value)
                     }}
                     value={count}
-                    placeholder="enter your count of product"
+                    placeholder="count of product"
                 />
             </div>
         </div>
