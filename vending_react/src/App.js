@@ -10,6 +10,8 @@ function App() {
     // get request account
     const [buyerBalance, setBuyerBalance] = useState()
     const [vendingBalance, setVendingBalance] = useState()
+    const [value, setValue] = useState()
+    const [amount, setAmount] = useState()
 
     async function RequestAccount() {
         await window.ethereum.request({ method: "eth_requestAccounts" })
@@ -52,10 +54,10 @@ function App() {
                     return donutBalances[address(this)];
                  }
                 */
-                const vendingBalance = await vendingContract.getVendingMachineBalance()
+                const newVendingBalance = await vendingContract.getVendingMachineBalance()
                 console.log("vending balance is: ", vendingBalance.toString())
                 // set in the useState
-                setVendingBalance(vendingBalance)
+                setVendingBalance(newVendingBalance)
             } catch (error) {
                 console.log("Error: ", error)
             }
