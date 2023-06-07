@@ -53,7 +53,7 @@ function App() {
                  }
                 */
                 const vendingBalance = await vendingContract.getVendingMachineBalance()
-                console.log("vending balance is: ", vendingBalance)
+                console.log("vending balance is: ", vendingBalance.toString())
                 // set in the useState
                 setVendingBalance(vendingBalance)
             } catch (error) {
