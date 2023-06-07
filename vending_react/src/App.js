@@ -79,7 +79,7 @@ function App() {
             const vendingContract = new ethers.Contract(
                 VENDING_MACHINE_ADDRESS,
                 VendingMachine.abi,
-                provider
+                signer
             )
             const purchaseTx = await vendingContract.purchase()
 
