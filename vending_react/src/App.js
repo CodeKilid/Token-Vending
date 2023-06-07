@@ -22,7 +22,12 @@ function App() {
     async function restock() {}
 
     // front side ---> jsx
-    return <div className="App"></div>
+    return (
+        <div className="App">
+            <button>buyer balance</button>
+            <button>restock</button>
+        </div>
+    )
 }
 
 export default App
