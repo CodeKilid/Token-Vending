@@ -29,9 +29,14 @@ function App() {
                 provider
             )
             try {
+                /*
+                function getBuyerBalancer() public view returns (uint256) {
+                    return donutBalances[msg.sender];
+                }
+                */
                 const newBuyerBalance = await vendingContract.getBuyerBalancer()
-                setBuyerBalance(newBuyerBalance)
-                console.log("BuyerBalance", buyerBalance.toString())
+                setBuyerBalance(newBuyerBalance.toString())
+                console.log("BuyerBalance", newBuyerBalance.toString())
             } catch (error) {
                 console.log(error)
             }
@@ -55,9 +60,9 @@ function App() {
                  }
                 */
                 const newVendingBalance = await vendingContract.getVendingMachineBalance()
-                console.log("vending balance is: ", vendingBalance.toString())
+                console.log("vending balance is: ", newVendingBalance.toString())
                 // set in the useState
-                setVendingBalance(newVendingBalance)
+                setVendingBalance(newVendingBalance.toString())
             } catch (error) {
                 console.log("Error: ", error)
             }
