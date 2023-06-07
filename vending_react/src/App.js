@@ -71,11 +71,11 @@ function App() {
     // front side ---> jsx
     return (
         <div className="App">
-            <button onclick={getVendingBalance}>vending balance</button>
-            <button onclick="">restock</button>
+            <button onClick={getVendingBalance}>vending balance</button>
+            <button onClick="">restock</button>
 
-            <button onclick={getBuyerBalance}>Buyer Balance</button>
-            <button onclick="">Purchse</button>
+            <button onClick={getBuyerBalance}>Buyer Balance</button>
+            <button onClick="">Purchse</button>
         </div>
     )
 }
