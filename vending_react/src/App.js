@@ -18,7 +18,7 @@ function App() {
     // get buyer balance
     async function getBuyerBalance() {
         if (typeof window.ethereum !== "undefined") {
-            // await RequestAccount()
+            await RequestAccount()
 
             const provider = new ethers.providers.Web3Provider(window.ethereum)
             const signer = provider.getSigner()
@@ -28,7 +28,12 @@ function App() {
                 VendingMachine.abi,
                 provider
             )
-            const transaction = vendingContract.getBuyerBalancer()
+            try {
+                const newBuyerBalance = await vendingContract.getBuyerBalancer()
+                setBuyerBalance(newBuyerBalance)
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
