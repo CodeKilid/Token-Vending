@@ -92,6 +92,7 @@ function App() {
                 </div>
                 <div className="display">
                     <h2 className="vending-balance"> Vending balance: {vendingBalance}</h2>
+                    <h2 className="user-balance"> User balance: {buyerBalance}</h2>
                 </div>
             </div>
         </div>
