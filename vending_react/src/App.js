@@ -41,23 +41,25 @@ function App() {
     async function getVendingBalance() {
         if (typeof window.ethereum !== "undefined") {
             const provider = new ethers.providers.Web3Provider(window.ethereum)
-            const contract = new ethers.Contract(
+            const vendingContract = new ethers.Contract(
                 VENDING_MACHINE_ADDRESS,
                 VendingMachine.abi,
                 provider
             )
-        }
-        // call contract.getVendingBalance() and display current balance of vending machine
-        /* function getVendingMachineBalance() public view returns (uint256) {
-              return donutBalances[address(this)];
-        }*/
-        try {
-            const vendingBalance = await contract.getVendingMachineBalance()
-            console.log("vending balance is: ", vendingBalance)
-            // set in the useState
-            setVendingBalance(vendingBalance)
-        } catch (error) {
-            console.log("Error: ", error)
+            try {
+                // call contract.getVendingBalance() and display current balance of vending machine
+                /*
+                 function getVendingMachineBalance() public view returns (uint256) {
+                    return donutBalances[address(this)];
+                 }
+                */
+                const vendingBalance = await vendingContract.getVendingMachineBalance()
+                console.log("vending balance is: ", vendingBalance)
+                // set in the useState
+                setVendingBalance(vendingBalance)
+            } catch (error) {
+                console.log("Error: ", error)
+            }
         }
     }
 
@@ -70,8 +72,8 @@ function App() {
     // front side ---> jsx
     return (
         <div className="App">
-            <button>buyer balance</button>
-            <button>restock</button>
+            <button onclick={getVendingBalance}>vending balance</button>
+            <button onclick="">restock</button>
 
             <button onclick="">Buyer Balance</button>
             <button onclick="">Purchse</button>
