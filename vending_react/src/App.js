@@ -10,7 +10,7 @@ function App() {
     // get request account
     const [buyerBalance, setBuyerBalance] = useState()
     const [vendingBalance, setVendingBalance] = useState()
-    const [count, setcount] = useState() // purchase
+    const [count, setCount] = useState() // purchase
     const [amount, setAmount] = useState() // restock
 
     async function RequestAccount() {
@@ -83,7 +83,7 @@ function App() {
             )
             const purchaseTx = await vendingContract.purchase()
 
-            setcount()
+            setCount()
             await purchaseTx.wait()
         }
     }
@@ -142,10 +142,14 @@ function App() {
 
                 {/* input section for change states of BlockChain */}
 
-                <input placeholder="Set Restock amount" />
+                <input
+                    onChange={(e) => setAmount(e.target.value)}
+                    value={amount}
+                    placeholder="Set Restock amount"
+                />
                 <input
                     onChange={(v) => {
-                        setcount(v.target.value)
+                        setCount(v.target.value)
                     }}
                     value={count}
                     placeholder="enter your count of product"
