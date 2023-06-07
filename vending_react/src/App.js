@@ -134,6 +134,7 @@ function App() {
                     <h2 className="user-balance"> User balance: {buyerBalance}</h2>
                 </div>
                 <input placeholder="Set Restock amount" />
+                <input placeholder="enter number of product" />
             </div>
         </div>
     )
