@@ -8,8 +8,8 @@ const VENDING_MACHINE_ADDRESS = "0x687bB6c57915aa2529EfC7D2a26668855e022fAE"
 function App() {
     /* functions */
     // get request account
-    const [buyerBalance, setBuyerBalance] = useState("")
-    const [vendingBalance, setVendingBalance] = useState("")
+    const [buyerBalance, setBuyerBalance] = useState()
+    const [vendingBalance, setVendingBalance] = useState()
 
     async function RequestAccount() {
         await window.ethereum.request({ method: "eth_requestAccounts" })
