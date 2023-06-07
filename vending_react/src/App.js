@@ -26,6 +26,9 @@ function App() {
         <div className="App">
             <button>buyer balance</button>
             <button>restock</button>
+
+            <button onclick="">Buyer Balance</button>
+            <button onclick="">Purchse</button>
         </div>
     )
 }
