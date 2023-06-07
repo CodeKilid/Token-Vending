@@ -122,6 +122,9 @@ function App() {
                     <h1> Vending Machine</h1>
                     <h3>Full stack dapp using ReactJS and Hardhat</h3>
                 </div>
+
+                {/* buttons section */}
+
                 <div className="custom-buttons">
                     <button onClick={getVendingBalance}>vending balance</button>
                     <button onClick={restock}>restock</button>
@@ -129,12 +132,18 @@ function App() {
                     <button onClick={getBuyerBalance}>Buyer Balance</button>
                     <button onClick={purchase}>Purchse</button>
                 </div>
+
+                {/* Current Value stored on Blockchain */}
+
                 <div className="display">
                     <h2 className="vending-balance"> Vending balance: {vendingBalance}</h2>
                     <h2 className="user-balance"> User balance: {buyerBalance}</h2>
                 </div>
+
+                {/* input section for change states of BlockChain */}
+
                 <input placeholder="Set Restock amount" />
-                <input placeholder="enter number of product" />
+                <input placeholder="enter your count of product" />
             </div>
         </div>
     )
