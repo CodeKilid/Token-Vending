@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.11;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
 
 /*  custom errors  */
 
@@ -10,6 +10,7 @@ error VendingMachine__ownerProperties(address owner);
 error VendingMachine__payMoreEth(uint amount);
 error VendingMachine__NotEnoughDonut(uint remainDonut);
 error VendingMachine__Limitation(uint limitation);
+error VendingMachine__FaildToSendEth();
 
 contract VendingMachine {
     /*  variables  */
@@ -57,6 +58,10 @@ contract VendingMachine {
 
         donutBalances[address(this)] -= _amount;
         donutBalances[msg.sender] += _amount;
+        (bool success, ) = address(this).call{value: msg.value}("");
+        if (!success) {
+            revert VendingMachine__FaildToSendEth();
+        }
     }
 
     /*  getter functions  */
