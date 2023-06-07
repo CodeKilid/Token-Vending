@@ -10,7 +10,7 @@ function App() {
     // get request account
     const [buyerBalance, setBuyerBalance] = useState()
     const [vendingBalance, setVendingBalance] = useState()
-    const [value, setValue] = useState() // purchase
+    const [count, setcount] = useState() // purchase
     const [amount, setAmount] = useState() // restock
 
     async function RequestAccount() {
@@ -71,7 +71,7 @@ function App() {
 
     // purchase
     async function purchase() {
-        if (!value) return
+        if (!count) return
         if (typeof window.ethereum !== "undefined") {
             await RequestAccount()
             const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -83,7 +83,7 @@ function App() {
             )
             const purchaseTx = await vendingContract.purchase()
 
-            setValue()
+            setcount()
             await purchaseTx.wait()
         }
     }
@@ -133,7 +133,7 @@ function App() {
                     <button onClick={purchase}>Purchse</button>
                 </div>
 
-                {/* Current Value stored on Blockchain */}
+                {/* Current count stored on Blockchain */}
 
                 <div className="display">
                     <h2 className="vending-balance"> Vending balance: {vendingBalance}</h2>
@@ -142,12 +142,14 @@ function App() {
 
                 {/* input section for change states of BlockChain */}
 
+                <input placeholder="Set Restock amount" />
                 <input
-                    onChange={(e) => setAmount(e.target.value)}
-                    value={amount}
-                    placeholder="Set Restock amount"
+                    onChange={(v) => {
+                        setcount(v.target.value)
+                    }}
+                    value={count}
+                    placeholder="enter your count of product"
                 />
-                <input placeholder="enter your count of product" />
             </div>
         </div>
     )
