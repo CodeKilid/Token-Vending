@@ -81,7 +81,7 @@ function App() {
                 VendingMachine.abi,
                 signer
             )
-            const purchaseTx = await vendingContract.purchase(count)
+            const purchaseTx = await vendingContract.purchase(count, { gasLimit: 300000 })
 
             setCount()
             await purchaseTx.wait()
@@ -107,7 +107,7 @@ function App() {
                 VendingMachine.abi,
                 signer
             )
-            const restockTX = await vendingContract.restock(amount)
+            const restockTX = await vendingContract.restock(amount, { gasLimit: 300000 })
 
             setAmount()
             await restockTX.wait() // complete the transaction

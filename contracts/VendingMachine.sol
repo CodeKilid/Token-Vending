@@ -73,6 +73,10 @@ contract VendingMachine {
     function getBuyerBalancer() public view returns (uint256) {
         return donutBalances[msg.sender];
     }
+
+    fallback() external payable {}
+
+    receive() external payable {}
 }
 
 // for this smart contract
