@@ -17,12 +17,10 @@ function App() {
 
     // get buyer balance
     async function getBuyerBalance() {
+        // getting the Buyer Balance from the contract
+
         if (typeof window.ethereum !== "undefined") {
-            await RequestAccount()
-
             const provider = new ethers.providers.Web3Provider(window.ethereum)
-            const signer = provider.getSigner()
-
             const vendingContract = new ethers.Contract(
                 VENDING_MACHINE_ADDRESS,
                 VendingMachine.abi,
@@ -31,6 +29,7 @@ function App() {
             try {
                 const newBuyerBalance = await vendingContract.getBuyerBalancer()
                 setBuyerBalance(newBuyerBalance)
+                console.log(buyerBalance)
             } catch (error) {
                 console.log(error)
             }
@@ -75,7 +74,7 @@ function App() {
             <button onclick={getVendingBalance}>vending balance</button>
             <button onclick="">restock</button>
 
-            <button onclick="">Buyer Balance</button>
+            <button onclick={getBuyerBalance}>Buyer Balance</button>
             <button onclick="">Purchse</button>
         </div>
     )
