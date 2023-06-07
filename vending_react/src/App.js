@@ -73,11 +73,22 @@ function App() {
     // front side ---> jsx
     return (
         <div className="App">
-            <button onClick={getVendingBalance}>vending balance</button>
-            <button onClick="">restock</button>
+            <div className="App-Header">
+                <div className="description">
+                    <h1> Vending Machine</h1>
+                    <h3>Full stack dapp using ReactJS and Hardhat</h3>
+                </div>
+                <div className="custom-buttons">
+                    <button onClick={getVendingBalance}>vending balance</button>
+                    <button onClick="">restock</button>
 
-            <button onClick={getBuyerBalance}>Buyer Balance</button>
-            <button onClick="">Purchse</button>
+                    <button onClick={getBuyerBalance}>Buyer Balance</button>
+                    <button onClick="">Purchse</button>
+                </div>
+                <div className="display">
+                    <h2 className="vending-balance"> Vending balance: {vendingBalance}</h2>
+                </div>
+            </div>
         </div>
     )
 }
