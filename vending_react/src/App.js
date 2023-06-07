@@ -50,6 +50,7 @@ function App() {
             const vendingBalance = await contract.getVendingMachineBalance()
             console.log("vending balance is: ", vendingBalance)
             // set in the useState
+            setVendingBalance(vendingBalance)
         } catch (error) {
             console.log("Error: ", error)
         }
