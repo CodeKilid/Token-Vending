@@ -10,8 +10,8 @@ function App() {
     // get request account
     const [buyerBalance, setBuyerBalance] = useState()
     const [vendingBalance, setVendingBalance] = useState()
-    const [value, setValue] = useState()
-    const [amount, setAmount] = useState()
+    const [value, setValue] = useState() // purchase
+    const [amount, setAmount] = useState() // restock
 
     async function RequestAccount() {
         await window.ethereum.request({ method: "eth_requestAccounts" })
@@ -73,7 +73,30 @@ function App() {
     async function purchase() {}
 
     // restock
-    async function restock() {}
+    async function restock() {
+        if (!amount) {
+            return
+        }
+
+        if (typeof window.ethereum !== "undefined") {
+            await RequestAccount()
+
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const signer = provider.getSigner()
+
+            // creating the contract with signer
+
+            const vendingContract = new ethers.Contract(
+                VENDING_MACHINE_ADDRESS,
+                VendingMachine.abi,
+                signer
+            )
+            const restockTX = await vendingContract.restock(amount)
+
+            setAmount()
+            await restockTX.wait() // complete the transaction
+        }
+    }
 
     // front side ---> jsx
     return (
@@ -85,7 +108,7 @@ function App() {
                 </div>
                 <div className="custom-buttons">
                     <button onClick={getVendingBalance}>vending balance</button>
-                    <button onClick="">restock</button>
+                    <button onClick={restock}>restock</button>
 
                     <button onClick={getBuyerBalance}>Buyer Balance</button>
                     <button onClick="">Purchse</button>
