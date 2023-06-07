@@ -142,7 +142,11 @@ function App() {
 
                 {/* input section for change states of BlockChain */}
 
-                <input placeholder="Set Restock amount" />
+                <input
+                    onChange={(e) => setAmount(e.target.value)}
+                    value={amount}
+                    placeholder="Set Restock amount"
+                />
                 <input placeholder="enter your count of product" />
             </div>
         </div>
