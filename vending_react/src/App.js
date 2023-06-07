@@ -81,7 +81,7 @@ function App() {
                 VendingMachine.abi,
                 signer
             )
-            const purchaseTx = await vendingContract.purchase()
+            const purchaseTx = await vendingContract.purchase(count)
 
             setCount()
             await purchaseTx.wait()
