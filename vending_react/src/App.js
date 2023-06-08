@@ -73,18 +73,30 @@ function App() {
     async function purchase() {
         if (!count) return
         if (typeof window.ethereum !== "undefined") {
-            await RequestAccount()
-            const provider = new ethers.providers.Web3Provider(window.ethereum)
-            const signer = provider.getSigner()
-            const vendingContract = new ethers.Contract(
-                VENDING_MACHINE_ADDRESS,
-                VendingMachine.abi,
-                signer
-            )
-            const purchaseTx = await vendingContract.purchase(count, { gasLimit: 300000 })
+            try {
+                await RequestAccount()
 
-            setCount()
-            await purchaseTx.wait()
+                const provider = new ethers.providers.Web3Provider(window.ethereum)
+                const signer = provider.getSigner()
+                const vendingContract = new ethers.Contract(
+                    VENDING_MACHINE_ADDRESS,
+                    VendingMachine.abi,
+                    signer
+                )
+
+                const price = await vendingContract.price()
+                const value = (price * count).toString()
+
+                const purchaseTx = await vendingContract.purchase(count, {
+                    value: value,
+                    gasLimit: 300000,
+                })
+
+                setCount()
+                await purchaseTx.wait()
+            } catch (error) {
+                console.log("Purchase Error:", error)
+            }
         }
     }
 
