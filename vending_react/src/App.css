@@ -17,17 +17,17 @@
 }
 
 .description {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem;  
 }
-
+/* 4285f4 */
 .custom-buttons button {
   margin-right: 1rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 4px;
   border: none;
-  background-color: #4285f4;
-  color: #fff;
+  /* background-color: #8A2BE2; */
+  /* color: #fff; */
   cursor: pointer;
 }
 
@@ -39,6 +39,20 @@
 .display h2 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+}
+
+.app-name {
+  color: #ecb018;
+}
+
+.get-func {
+  background-color: #32CD32;
+  color: #f2f2f2;
+}
+
+.tx-func {
+  background-color: #FFA500;
+  color: #f2f2f2;
 }
 
 input {
@@ -62,5 +76,9 @@ input[type="number"] {
 }
 
 .vending-balance {
-  color: #db4437;
+  color: #984687;
+}
+
+.hint {
+  color: rgb(122, 26, 26);
 }

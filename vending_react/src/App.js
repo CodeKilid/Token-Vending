@@ -131,18 +131,26 @@ function App() {
         <div className="App">
             <div className="App-Header">
                 <div className="description">
-                    <h1> Vending Machine</h1>
+                    <h1 className="app-name">Token Vending</h1>
                     <h3>Full stack dapp using ReactJS and Hardhat</h3>
                 </div>
 
                 {/* buttons section */}
 
                 <div className="custom-buttons">
-                    <button onClick={getVendingBalance}>vending balance</button>
-                    <button onClick={restock}>restock</button>
+                    <button className="get-func" onClick={getVendingBalance}>
+                        vending balance
+                    </button>
+                    <button className="tx-func" onClick={restock}>
+                        restock
+                    </button>
 
-                    <button onClick={getBuyerBalance}>Buyer Balance</button>
-                    <button onClick={purchase}>Purchse</button>
+                    <button className="get-func" onClick={getBuyerBalance}>
+                        Buyer Balance
+                    </button>
+                    <button className="tx-func" onClick={purchase}>
+                        Purchse
+                    </button>
                 </div>
 
                 {/* Current count stored on Blockchain */}
@@ -166,6 +174,12 @@ function App() {
                     value={count}
                     placeholder="count of product"
                 />
+
+                <h5 className="hint">
+                    This is a simple demo version of the application. <br />
+                    Please note that it is for demonstration purposes only <br />
+                    and will be used in a more robust version in thefuture.
+                </h5>
             </div>
         </div>
     )
