@@ -115,6 +115,9 @@ module.exports = {
         player: {
             default: 1,
         },
+        user: {
+            default: process.env.PRIVATE_KEY,
+        },
     },
     // gasReporter: {
     //     enabled: REPORT_GAS,
