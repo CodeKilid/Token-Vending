@@ -3,7 +3,7 @@ import { ethers } from "ethers"
 import { useState } from "react"
 import VendingMachine from "./artifacts/contracts/VendingMachine.sol/VendingMachine.json"
 
-const VENDING_MACHINE_ADDRESS = "0x687bB6c57915aa2529EfC7D2a26668855e022fAE"
+const VENDING_MACHINE_ADDRESS = "0x66e5CE39C90341f54b6D5B43710B2e034CDe6A7D"
 
 function App() {
     /* functions */
@@ -23,6 +23,7 @@ function App() {
 
         if (typeof window.ethereum !== "undefined") {
             const provider = new ethers.providers.Web3Provider(window.ethereum)
+
             const vendingContract = new ethers.Contract(
                 VENDING_MACHINE_ADDRESS,
                 VendingMachine.abi,
@@ -35,8 +36,8 @@ function App() {
                 }
                 */
                 const newBuyerBalance = await vendingContract.getBuyerBalancer()
-                setBuyerBalance(newBuyerBalance.toString())
                 console.log("BuyerBalance", newBuyerBalance.toString())
+                setBuyerBalance(newBuyerBalance.toString())
             } catch (error) {
                 console.log(error)
             }
@@ -97,6 +98,8 @@ function App() {
             } catch (error) {
                 console.log("Purchase Error:", error)
             }
+        } else {
+            console.log("type is undefined")
         }
     }
 
