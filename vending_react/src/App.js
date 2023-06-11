@@ -23,11 +23,11 @@ function App() {
 
         if (typeof window.ethereum !== "undefined") {
             const provider = new ethers.providers.Web3Provider(window.ethereum)
-
+            const signer = provider.getSigner()
             const vendingContract = new ethers.Contract(
                 VENDING_MACHINE_ADDRESS,
                 VendingMachine.abi,
-                provider
+                signer
             )
             try {
                 /*
