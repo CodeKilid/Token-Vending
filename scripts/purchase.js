@@ -1,8 +1,9 @@
 const { getNamedAccounts, ethers } = require("hardhat")
 
 async function main() {
-    const user = (await getNamedAccounts()).user
-    const vendingContract = await ethers.getContract("VendingMachine", user)
+    // const user = (await getNamedAccounts()).user
+    // console.log(user)
+    const vendingContract = await ethers.getContract("VendingMachine")
 
     console.log("purchasing...")
     const fee = await vendingContract.price()
