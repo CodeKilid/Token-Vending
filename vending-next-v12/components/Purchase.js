@@ -10,7 +10,7 @@ const Purchase = () => {
     const { chainId, account } = useMoralis()
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const contractAddress = networkMapping[chainString].VendingMachine[0]
-
+    let purchaseTx
     // const { runContractFunction: purchase } = useWeb3Contract({
     //     abi: vendingMahineAbi,
     //     contractAddress: contractAddress,
@@ -20,28 +20,30 @@ const Purchase = () => {
     //         amount: count,
     //     },
     // })
+    if (typeof window !== "undefined") {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer = provider.getSigner()
+        const vendingContract = new ethers.Contract(contractAddress, vendingMahineAbi, signer)
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = provider.getSigner()
-    const vendingContract = new ethers.Contract(contractAddress, vendingMahineAbi, signer)
+        purchaseTx = async () => {
+            if (account) {
+                try {
+                    const price = (await vendingContract.price()).toString()
+                    console.log(price)
+                    const purchaseTransaction = await vendingContract.purchase(count, {
+                        gasLimit: 300000,
+                        value: count * price,
+                    })
 
-    const purchaseTx = async () => {
-        if (account) {
-            try {
-                const price = (await vendingContract.price()).toString()
-                console.log(price)
-                const purchaseTransaction = await vendingContract.purchase(count, {
-                    gasLimit: 300000,
-                    value: count * price,
-                })
-
-                await purchaseTransaction.wait()
-                console.log(`you purchased ${count}`)
-            } catch (error) {
-                console.error("Error purchasing:", error)
+                    await purchaseTransaction.wait()
+                    console.log(`you purchased ${count}`)
+                } catch (error) {
+                    console.error("Error purchasing:", error)
+                }
             }
         }
     }
+
     return (
         <div>
             <div>

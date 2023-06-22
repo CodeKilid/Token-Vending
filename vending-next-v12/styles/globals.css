@@ -14,3 +14,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.getDisplay {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  /* background-color: #8A2BE2; */
+  /* color: #fff; */
+  cursor: pointer;
+}
