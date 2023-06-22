@@ -3,6 +3,7 @@ import vendingMachineAbi from "../constant/TokenVending.json"
 import { useState } from "react"
 import networkMapping from "../constant/networkMapping.json"
 import React from "react"
+import { Button } from "web3uikit"
 
 const GetVendingBalance = () => {
     const { chainId, account } = useMoralis()
@@ -28,7 +29,7 @@ const GetVendingBalance = () => {
     }
     return (
         <div>
-            <button onClick={fetchVendingMachineBalance}> Inventory </button>
+            <Button text="Inventory" onClick={fetchVendingMachineBalance} />
             <h2>{vendingBalance}</h2>
         </div>
     )

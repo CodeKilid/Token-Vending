@@ -2,6 +2,7 @@ import { useMoralis, useWeb3Contract } from "react-moralis"
 import vendingMachineAbi from "../constant/TokenVending.json"
 import { useState } from "react"
 import networkMapping from "../constant/networkMapping.json"
+import { Button } from "web3uikit"
 
 function GetBuyerBalance() {
     const { chainId, account } = useMoralis()
@@ -37,7 +38,7 @@ function GetBuyerBalance() {
 
     return (
         <>
-            <button onClick={fetchBUyerBalance}>Your Balance</button>
+            <Button text="Your Balance" onClick={fetchBUyerBalance} />
             <h2>{newBuyerBalance}</h2>
         </>
     )

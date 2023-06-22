@@ -4,7 +4,7 @@ const {
     VERIFICATION_BLOCK_CONFIRMATIONS,
 } = require("../helper-hardhat-config.js")
 const { network } = require("hardhat")
-const { verify } = require("../utils/verify")
+const { verify } = require("../utils/verify.js")
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
