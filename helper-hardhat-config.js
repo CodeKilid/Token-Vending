@@ -30,11 +30,14 @@ const developmentChains = ["hardhat", "localhost"]
 const DECIMALS = 8
 const INITIAL_ANSWER = 200000000000
 const VERIFICATION_BLOCK_CONFIRMATIONS = 5
-
+const frontEndAbiLocation = "vending-next-v12/constant/"
+const frontEndContractFile = "vending-next-v12/constant/networkMapping.json"
 module.exports = {
     networkConfig,
     developmentChains,
     DECIMALS,
     INITIAL_ANSWER,
     VERIFICATION_BLOCK_CONFIRMATIONS,
+    frontEndAbiLocation,
+    frontEndContractFile,
 }
